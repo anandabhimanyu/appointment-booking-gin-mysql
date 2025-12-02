@@ -1,0 +1,89 @@
+openapi: 3.0.1
+info:
+  title: Appointment Booking API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /coaches:
+    post:
+      summary: Create a coach
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                timezone: { type: string }
+              required: [name, timezone]
+      responses:
+        '201':
+          description: Created
+  /coaches/availability:
+    post:
+      summary: Add coach weekly availability
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                coach_id: { type: integer }
+                day: { type: integer }
+                start_time: { type: string }
+                end_time: { type: string }
+              required: [coach_id, day, start_time, end_time]
+      responses:
+        '201': { description: Created }
+  /users/slots:
+    get:
+      summary: Get available 30-minute slots for coach on a date
+      parameters:
+        - in: query
+          name: coach_id
+          schema: { type: integer }
+          required: true
+        - in: query
+          name: date
+          schema: { type: string }
+          required: true
+      responses:
+        '200': { description: OK }
+  /users/bookings:
+    post:
+      summary: Book a slot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id: { type: integer }
+                coach_id: { type: integer }
+                datetime: { type: string, description: "RFC3339 with timezone" }
+              required: [user_id, coach_id, datetime]
+      responses:
+        '201': { description: Created }
+    get:
+      summary: Get upcoming bookings for a user
+      parameters:
+        - in: query
+          name: user_id
+          schema: { type: integer }
+          required: true
+      responses:
+        '200': { description: OK }
+  /users/bookings/{id}:
+    delete:
+      summary: Cancel a booking
+      parameters:
+        - in: path
+          name: id
+          schema: { type: integer }
+          required: true
+      responses:
+        '200': { description: OK }

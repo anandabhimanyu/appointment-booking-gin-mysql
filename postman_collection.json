@@ -1,0 +1,143 @@
+{
+  "info": {
+    "name": "Appointment Booking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Coach",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"Coach A\",\"timezone\":\"Asia/Kolkata\"}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/coaches",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "coaches"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Add Availability",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"coach_id\":1,\"day\":2,\"start_time\":\"09:00\",\"end_time\":\"14:00\"}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/coaches/availability",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "coaches",
+            "availability"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Slots",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/users/slots?coach_id=1&date=2025-10-28",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            "slots"
+          ],
+          "query": [
+            {
+              "key": "coach_id",
+              "value": "1"
+            },
+            {
+              "key": "date",
+              "value": "2025-10-28"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Book Slot",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"user_id\":101,\"coach_id\":1,\"datetime\":\"2025-10-28T09:30:00+05:30\"}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/bookings",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            "bookings"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get User Bookings",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/users/bookings?user_id=101",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            "bookings"
+          ],
+          "query": [
+            {
+              "key": "user_id",
+              "value": "101"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
