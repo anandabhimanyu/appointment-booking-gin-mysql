@@ -77,9 +77,8 @@ func loadEnv() {
 }
 
 func main() {
-	// Load environment variables first
-	loadEnv()
 
+	loadEnv()
 	// Read MYSQL_DSN from env or .env
 	dsn := os.Getenv("MYSQL_DSN")
 	if dsn == "" {
